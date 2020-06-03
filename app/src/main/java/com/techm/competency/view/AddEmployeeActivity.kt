@@ -32,9 +32,9 @@ class AddEmployeeActivity : AppCompatActivity() {
     private lateinit var mSpinnerAdapter: SpinnerAdapter
     private lateinit var dialog: AlertDialog
     private var intentExtra: Int = 0
-    var editProjectName = ""
+    private var editProjectName = ""
     private var project = ""
-    var employeeId: Int = 0
+    private var employeeId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -57,7 +57,7 @@ class AddEmployeeActivity : AppCompatActivity() {
         }
 
         addProject.setOnClickListener {
-            var intent = Intent(this, ProjectActivity::class.java)
+            val intent = Intent(this, ProjectActivity::class.java)
             startActivity(intent)
         }
         buttonEdit.setOnClickListener {
@@ -72,7 +72,7 @@ class AddEmployeeActivity : AppCompatActivity() {
         mAddEmployeeViewModel.mProjectData.observe(this, Observer {
             mSpinnerAdapter.setLIst(it as ArrayList<Project>)
             if (intentExtra != 0) {
-                var position = mSpinnerAdapter.getPosition(editProjectName)
+                val position = mSpinnerAdapter.getPosition(editProjectName)
                 spinnerProject.setSelection(position)
             }
         })
@@ -156,7 +156,7 @@ class AddEmployeeActivity : AppCompatActivity() {
         val employeeDesignation = textFieldDesignation.editText!!.text.toString()
         val textFieldEmployeeID = textFieldEmployeeId.editText!!.text.toString()
 
-        var employeeCompetency: String =
+        val employeeCompetency: String =
             findViewById<RadioButton>(rBtnGroup.checkedRadioButtonId).text.toString()
 
         when {
@@ -181,7 +181,7 @@ class AddEmployeeActivity : AppCompatActivity() {
                 toast(getString(R.string.please_select_project))
             }
             else -> {
-                var employee =
+                val employee =
                     Employee(
                         0,
                         employeeName,

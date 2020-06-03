@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData
  */
 class ProjectRepository {
 
-    lateinit var projectDao: ProjectDao
-    lateinit var allProjects: LiveData<List<Project>>
+    private lateinit var projectDao: ProjectDao
+    private lateinit var allProjects: LiveData<List<Project>>
 
     constructor(application: Application) {
         val competencyDatabase = CompetencyDatabase.invoke(application)

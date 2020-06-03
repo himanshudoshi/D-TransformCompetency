@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull
 class ProjectViewModel(@NotNull application: Application) :
     AndroidViewModel(application) {
 
-    lateinit var mProject: Project
+    private lateinit var mProject: Project
     private var projectRepository: ProjectRepository = ProjectRepository(application)
     var mProjectData: LiveData<List<Project>> =
         projectRepository.getAllProjectData()

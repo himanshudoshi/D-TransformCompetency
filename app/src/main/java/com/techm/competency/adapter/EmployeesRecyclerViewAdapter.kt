@@ -27,7 +27,7 @@ class EmployeesRecyclerViewAdapter : RecyclerView.Adapter<ViewHolder> {
         listener: ItemClickListener
     ) {
         this.items = items
-        this.listener = listener;
+        this.listener = listener
         if (context != null) {
             this.context = context
         }

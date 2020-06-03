@@ -3,15 +3,14 @@ package com.techm.competency.view
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.techm.competency.database.Employee
 import com.techm.competency.database.EmployeeRepository
-import com.techm.competency.model.EmployeesResponseModel
 import com.techm.competency.database.Project
-import com.techm.competency.model.ProjectModel
+import com.techm.competency.model.EmployeesResponseModel
 import com.techm.competency.viewmodel.AddEmployeeViewModel
 import com.techm.competency.viewmodel.EmployeeViewModel
 import io.reactivex.Maybe
-import org.junit.Assert.*
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,8 +25,8 @@ class AddEmployeeActivityTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var mAddEmployeeViewModel: AddEmployeeViewModel
-    lateinit var employeeRepository: EmployeeRepository
+    private lateinit var mAddEmployeeViewModel: AddEmployeeViewModel
+    private lateinit var employeeRepository: EmployeeRepository
 
     @Before
     fun setUp() {
@@ -49,7 +48,6 @@ class AddEmployeeActivityTest {
         this.mAddEmployeeViewModel.mEmployeeResponse.observeForever(observer)
 
         this.mAddEmployeeViewModel.getEmployeeData("1")
-        Thread.sleep(10000)
         assertNotNull(this.mAddEmployeeViewModel.mEmployeeResponse.value)
     }
 
@@ -64,14 +62,12 @@ class AddEmployeeActivityTest {
         this.mAddEmployeeViewModel.mEmployeeResponse.observeForever(observer)
 
         this.mAddEmployeeViewModel.getEmployeeData("1")
-        Thread.sleep(10000)
-
         assertNull(this.mAddEmployeeViewModel.mEmployeeResponse.value)
     }
 
     /** This test should be success because we will get success response  */
     @Test
-    suspend fun test_getProjectQuerySuccess() {
+    fun test_getProjectQuerySuccess() {
         Mockito.`when`(this.employeeRepository.getAllProjectData()).thenAnswer {
             return@thenAnswer Maybe.just(ArgumentMatchers.any<EmployeeViewModel>())
         }
@@ -80,13 +76,12 @@ class AddEmployeeActivityTest {
         this.mAddEmployeeViewModel.mProjectData.observeForever(observer)
 
         this.mAddEmployeeViewModel.mProjectData
-        Thread.sleep(10000)
         assertNotNull(this.mAddEmployeeViewModel.mProjectData.value)
     }
 
     /** This test should be fail because we will get success response  */
     @Test
-    suspend fun test_getProjectQueryError() {
+    fun test_getProjectQueryError() {
         Mockito.`when`(this.employeeRepository.getAllProjectData()).thenAnswer {
             return@thenAnswer Maybe.just(ArgumentMatchers.any<EmployeeViewModel>())
         }
@@ -95,7 +90,6 @@ class AddEmployeeActivityTest {
         this.mAddEmployeeViewModel.mProjectData.observeForever(observer)
 
         this.mAddEmployeeViewModel.mProjectData
-        Thread.sleep(10000)
         assertNull(this.mAddEmployeeViewModel.mProjectData.value)
     }
 

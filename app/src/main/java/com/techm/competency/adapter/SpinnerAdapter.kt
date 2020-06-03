@@ -17,9 +17,8 @@ class SpinnerAdapter(val context: Context, private var projectList: ArrayList<Pr
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View
         val vh: ItemRowHolder
-        view = mInflater.inflate(R.layout.item_project, parent, false)
+        val view: View = mInflater.inflate(R.layout.item_project, parent, false)
         vh = ItemRowHolder(view)
         view?.tag = vh
 

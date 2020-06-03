@@ -2,7 +2,6 @@ package com.techm.competency.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.techm.competency.model.EmployeesResponseModel
 
 /**
  * Interface for Employee Queries

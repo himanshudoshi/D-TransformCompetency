@@ -24,8 +24,8 @@ class EmployeeActivityTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var mEmployeeViewModel: EmployeeViewModel
-    lateinit var employeeRepository: EmployeeRepository
+    private lateinit var mEmployeeViewModel: EmployeeViewModel
+    private lateinit var employeeRepository: EmployeeRepository
 
     @Before
     fun setUp() {

@@ -81,7 +81,7 @@ class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                var mModelEmployeeInformation =
+                val mModelEmployeeInformation =
                     mEmployeeAdapter.getItemAtPosition(viewHolder.adapterPosition)
                 mEmployeeAdapter.removeAt(viewHolder.adapterPosition)
                 mEmployeeViewModel.deleteEmployee(mModelEmployeeInformation)
@@ -111,7 +111,7 @@ class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
 
         return when (item.itemId) {
             R.id.action_add -> {
-                var intent = Intent(this, AddEmployeeActivity::class.java)
+                val intent = Intent(this, AddEmployeeActivity::class.java)
                 intent.putExtra(Constant.openFor, 0)
                 startActivity(intent)
                 true
@@ -121,7 +121,7 @@ class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun onItemClick(employee: Employee, position: Int) {
-        var intent = Intent(this, AddEmployeeActivity::class.java)
+        val intent = Intent(this, AddEmployeeActivity::class.java)
         intent.putExtra(Constant.openFor, 1)
         intent.putExtra(Constant.data, employee.id)
         startActivity(intent)

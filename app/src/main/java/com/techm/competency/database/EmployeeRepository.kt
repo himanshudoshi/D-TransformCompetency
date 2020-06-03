@@ -8,10 +8,10 @@ import androidx.lifecycle.LiveData
  */
 class EmployeeRepository(application: Application) {
 
-    var employeeDao: EmployeeDao
-    var projectDao: ProjectDao
-    var allProjects: LiveData<List<Project>>
-    var allEmployeesResponseModel: LiveData<List<Employee>>
+    private var employeeDao: EmployeeDao
+    private var projectDao: ProjectDao
+    private var allProjects: LiveData<List<Project>>
+    private var allEmployeesResponseModel: LiveData<List<Employee>>
 
     init {
         val competencyDatabase = CompetencyDatabase.invoke(application)

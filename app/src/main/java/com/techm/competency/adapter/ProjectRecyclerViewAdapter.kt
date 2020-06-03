@@ -24,7 +24,7 @@ class ProjectRecyclerViewAdapter : RecyclerView.Adapter<ProjectViewHolder> {
         listener: ItemClickListener
     ) {
         this.items = items
-        this.listener = listener;
+        this.listener = listener
         if (context != null) {
             this.context = context
         }
@@ -34,17 +34,6 @@ class ProjectRecyclerViewAdapter : RecyclerView.Adapter<ProjectViewHolder> {
     /** Return item counts of Projects */
     override fun getItemCount(): Int {
         return items.size
-    }
-
-    /** Remove items in list  for SwipeToDelete functionality and update data set */
-    fun removeAt(position: Int) {
-        this.items.removeAt(position)
-        notifyItemRemoved(position)
-    }
-
-    /**  Find item in list for SwipeToDelete functionality and update data set */
-    fun getItemAtPosition(position: Int): Project {
-        return this.items[position]
     }
 
     /** set items in list and update data set */
