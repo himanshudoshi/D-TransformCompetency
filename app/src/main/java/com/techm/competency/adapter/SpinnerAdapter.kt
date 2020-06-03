@@ -10,40 +10,39 @@ import com.techm.competency.R
 import com.techm.competency.database.Project
 import kotlinx.android.synthetic.main.item_project.view.*
 
+/** Class Adapter to populate items in Spinner */
 class SpinnerAdapter(val context: Context, private var projectList: ArrayList<Project>) :
     BaseAdapter() {
-
 
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View
         val vh: ItemRowHolder
-            view = mInflater.inflate(R.layout.item_project, parent, false)
-            vh = ItemRowHolder(view)
-            view?.tag = vh
+        view = mInflater.inflate(R.layout.item_project, parent, false)
+        vh = ItemRowHolder(view)
+        view?.tag = vh
 
         vh.label.text = projectList[position].projectName
         return view
     }
 
+    /** set items in list and update Spinner */
     fun setLIst(projectList: ArrayList<Project>) {
-        this.projectList=projectList
+        this.projectList = projectList
         notifyDataSetChanged()
     }
 
+    /** Return item of Projects */
     override fun getItem(position: Int): Project {
-
         return projectList[position]
-
     }
 
     override fun getItemId(position: Int): Long {
-
         return 0
-
     }
 
+    /** Return item counts of Projects */
     override fun getCount(): Int {
         return projectList.size
     }

@@ -22,6 +22,9 @@ import com.techm.competency.utils.*
 import com.techm.competency.viewmodel.EmployeeViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * Activity that displays all Employee details in the app
+ */
 class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
     EmployeesRecyclerViewAdapter.ItemClickListener {
     private lateinit var mEmployeeViewModel: EmployeeViewModel
@@ -34,14 +37,15 @@ class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportActionBar?.title=getString(R.string.competency_title)
+        supportActionBar?.title = getString(R.string.competency_title)
         mEmployeeViewModel = ViewModelProvider(this).get(EmployeeViewModel::class.java)
         searchView.queryHint = getString(R.string.search)
 
         swipeToRefresh.setOnRefreshListener {
             mEmployeeViewModel.getEmployeeInformation()
-            swipeToRefresh.isRefreshing=false
+            swipeToRefresh.isRefreshing = false
         }
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
@@ -59,14 +63,14 @@ class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
                 DividerItemDecoration.VERTICAL
             )
         )
-        /**
-         * Setting blank adapter for initialize
-         */
+
+        /** adapter initialize  */
         mEmployeeAdapter = EmployeesRecyclerViewAdapter(ArrayList(), context, this)
         linearLayoutManager = LinearLayoutManager(this)
         employeeList.layoutManager = linearLayoutManager
         employeeList.adapter = mEmployeeAdapter
 
+        /** SwipeToDelete Functionality to remove selected item from RecyclerView */
         val swipeHandler = object : SwipeToDeleteCallback(context) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -86,9 +90,7 @@ class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(employeeList)
 
-        /**
-         * API Live data observer
-         * */
+        /**Live data observer */
         mEmployeeViewModel.mEmployeeInformationData.observe(this, Observer {
             mEmployeeAdapter.setList(it)
         })
@@ -104,17 +106,14 @@ class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
         return true
     }
 
-    /**
-     *  Handle action bar item clicks here
-     * */
+    /** Action bar item clicks here */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return when (item.itemId) {
             R.id.action_add -> {
                 var intent = Intent(this, AddEmployeeActivity::class.java)
-                intent.putExtra(Constant.openFor,0)
+                intent.putExtra(Constant.openFor, 0)
                 startActivity(intent)
-                //   findNavController().navigate(R.id.action_EmployeeInformation_to_AddEmployee)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -123,10 +122,8 @@ class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onItemClick(employee: Employee, position: Int) {
         var intent = Intent(this, AddEmployeeActivity::class.java)
-        intent.putExtra(Constant.openFor,1)
-        intent.putExtra(Constant.data,employee.id)
+        intent.putExtra(Constant.openFor, 1)
+        intent.putExtra(Constant.data, employee.id)
         startActivity(intent)
     }
-
-
 }

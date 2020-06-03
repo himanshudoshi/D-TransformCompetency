@@ -19,8 +19,10 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class AddEmployeeActivityTest
-{
+/**
+ *  Add Employee Activity Test
+ */
+class AddEmployeeActivityTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -35,6 +37,8 @@ class AddEmployeeActivityTest
         this.employeeRepository = EmployeeRepository(application)
         this.mAddEmployeeViewModel = AddEmployeeViewModel(application)
     }
+
+    /** This test should be Success because we will get success response  */
     @Test
     suspend fun test_getSingleEmployeeQuerySuccess() {
         Mockito.`when`(this.employeeRepository.getEmployee("1")).thenAnswer {
@@ -49,10 +53,7 @@ class AddEmployeeActivityTest
         assertNotNull(this.mAddEmployeeViewModel.mEmployeeResponse.value)
     }
 
-    /**
-     * This test should be fail because we will get success response from API
-     * */
-
+    /** This test should be fail because we will get success response */
     @Test
     suspend fun test_getSingleEmployeeQueryError() {
         Mockito.`when`(this.employeeRepository.getEmployee("1")).thenAnswer {
@@ -68,6 +69,7 @@ class AddEmployeeActivityTest
         assertNull(this.mAddEmployeeViewModel.mEmployeeResponse.value)
     }
 
+    /** This test should be success because we will get success response  */
     @Test
     suspend fun test_getProjectQuerySuccess() {
         Mockito.`when`(this.employeeRepository.getAllProjectData()).thenAnswer {
@@ -82,9 +84,7 @@ class AddEmployeeActivityTest
         assertNotNull(this.mAddEmployeeViewModel.mProjectData.value)
     }
 
-    /**
-     * This test should be fail because we will get success response from API
-     * */
+    /** This test should be fail because we will get success response  */
     @Test
     suspend fun test_getProjectQueryError() {
         Mockito.`when`(this.employeeRepository.getAllProjectData()).thenAnswer {

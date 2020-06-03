@@ -11,6 +11,9 @@ import com.techm.competency.model.EmployeeDeleteModel
 import kotlinx.coroutines.launch
 import org.jetbrains.annotations.NotNull
 
+/**
+ *  Employee View Model class to Display Employee Details
+ */
 class EmployeeViewModel(@NotNull application: Application) :
     AndroidViewModel(application) {
 

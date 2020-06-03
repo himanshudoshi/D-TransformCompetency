@@ -4,7 +4,7 @@ import com.techm.competency.utils.ResponseStatus
 
 
 /**
- * This class for handle API response
+ * This class for handle Employee response
  * */
 class EmployeesResponseModel(
     var error: String,

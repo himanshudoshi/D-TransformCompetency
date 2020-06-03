@@ -5,10 +5,11 @@ import androidx.room.*
 import com.techm.competency.model.EmployeesResponseModel
 
 /**
- * In this interface have all queries fo room database
+ * Interface for Employee Queries
  */
 @Dao
 interface EmployeeDao {
+
     @Query("SELECT * FROM employee_data_table")
     fun getAllEmployee(): LiveData<List<Employee>>
 
@@ -25,7 +26,7 @@ interface EmployeeDao {
     suspend fun deleteAllEmployee()
 
     @Update
-    suspend fun updateEmployee( todo: Employee): Int
+    suspend fun updateEmployee(todo: Employee): Int
 
     @Query("SELECT * FROM employee_data_table WHERE id = :id")
     suspend fun findByEmployeeId(id: String?): Employee

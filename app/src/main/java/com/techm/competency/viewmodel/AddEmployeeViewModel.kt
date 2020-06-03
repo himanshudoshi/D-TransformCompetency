@@ -1,7 +1,6 @@
 package com.techm.competency.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +13,9 @@ import com.techm.competency.utils.ResponseStatus
 import kotlinx.coroutines.launch
 import org.jetbrains.annotations.NotNull
 
+/**
+ *  Add Employee View Model class to Save Employee Details
+ */
 class AddEmployeeViewModel(@NotNull application: Application) :
     AndroidViewModel(application) {
     private var employeeRepository: EmployeeRepository = EmployeeRepository(application)
@@ -25,15 +27,15 @@ class AddEmployeeViewModel(@NotNull application: Application) :
     var mEmployeeResponseUpdate: MutableLiveData<Employee> =
         MutableLiveData<Employee>()
 
-    /**
-     * Calling room methods
-     */
+    /** To Save Employee Details in Database */
     fun insertEmployee(employeeInformation: Employee) = viewModelScope.launch {
         if (employeeRepository.insertEmployee(employeeInformation) > 0)
             mEmployeeResponse.value = EmployeesResponseModel("", ResponseStatus.SUCCESS)
         else
             mEmployeeResponse.value = EmployeesResponseModel("", ResponseStatus.FAIL)
     }
+
+    /** To Update Employee Details in Database */
     fun updateEmployee(employeeInformation: Employee) = viewModelScope.launch {
         if (employeeRepository.updateEmployee(employeeInformation) > 0)
             mEmployeeResponse.value = EmployeesResponseModel("", ResponseStatus.SUCCESS)
@@ -41,7 +43,8 @@ class AddEmployeeViewModel(@NotNull application: Application) :
             mEmployeeResponse.value = EmployeesResponseModel("", ResponseStatus.FAIL)
     }
 
-    fun getEmployeeData(employeeId: String)= viewModelScope.launch {
-        mEmployeeResponseUpdate.value=employeeRepository.getEmployee(employeeId)
+    /** To Get Employee Details from Database */
+    fun getEmployeeData(employeeId: String) = viewModelScope.launch {
+        mEmployeeResponseUpdate.value = employeeRepository.getEmployee(employeeId)
     }
 }

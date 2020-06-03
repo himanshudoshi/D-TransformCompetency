@@ -22,7 +22,11 @@ import com.techm.competency.utils.toast
 import com.techm.competency.viewmodel.AddEmployeeViewModel
 import kotlinx.android.synthetic.main.activity_add_employee.*
 
+/**
+ * Activity to Add Employee details in the app
+ */
 class AddEmployeeActivity : AppCompatActivity() {
+
     private lateinit var builder: AlertDialog.Builder
     private lateinit var mAddEmployeeViewModel: AddEmployeeViewModel
     private lateinit var mSpinnerAdapter: SpinnerAdapter
@@ -30,16 +34,18 @@ class AddEmployeeActivity : AppCompatActivity() {
     private var intentExtra: Int = 0
     var editProjectName = ""
     private var project = ""
-
     var employeeId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_employee)
-        supportActionBar?.title=getString(R.string.add_employee)
+        supportActionBar?.title = getString(R.string.add_employee)
         mAddEmployeeViewModel = ViewModelProvider(this).get(AddEmployeeViewModel::class.java)
         intentExtra = intent.getIntExtra(Constant.openFor, 0)
         tvID.keyListener = null
         tvID.isEnabled = false
+
         if (intentExtra == 0)
             buttonEdit.visibility = View.GONE
         else {
@@ -49,6 +55,7 @@ class AddEmployeeActivity : AppCompatActivity() {
             fillFeatureData(employeeId)
             lockAllFields()
         }
+
         addProject.setOnClickListener {
             var intent = Intent(this, ProjectActivity::class.java)
             startActivity(intent)
@@ -89,9 +96,8 @@ class AddEmployeeActivity : AppCompatActivity() {
         mAddEmployeeViewModel.mEmployeeResponseUpdate.observe(this, Observer {
             setEmployeeData(it)
         })
-        /**
-         * API Live data observer
-         * */
+
+        /** Live data observer to Save Employee details in Database */
         mAddEmployeeViewModel.mEmployeeResponse.observe(this, Observer {
             hideProgressDialog()
             when (it.status) {
@@ -111,6 +117,7 @@ class AddEmployeeActivity : AppCompatActivity() {
         mAddEmployeeViewModel.getEmployeeData("" + employeeId)
     }
 
+    /** Clear Text Fields in the Activity */
     private fun clearText() {
         textFieldName.editText!!.setText("")
         textFieldBand.editText!!.setText("")
@@ -120,12 +127,14 @@ class AddEmployeeActivity : AppCompatActivity() {
         rBtnAndroid.isChecked = true
     }
 
+    /** Add Employee Data in Database */
     private fun setEmployeeData(employee: Employee) {
         textFieldName.editText?.setText(employee.name)
         textFieldBand.editText?.setText(employee.band)
         textFieldDesignation.editText?.setText(employee.designation)
         textFieldEmployeeId.editText?.setText(employee.employeeId)
         textFieldId.editText?.setText("" + employee.id)
+
         when (employee.competency) {
             getString(R.string.android) ->
                 rBtnAndroid.isSelected = true
@@ -138,9 +147,9 @@ class AddEmployeeActivity : AppCompatActivity() {
         }
         editProjectName = employee.project
 
-
     }
 
+    /** Save Employee Data in Database */
     private fun saveEmployeeRecord() {
         val employeeName = textFieldName.editText!!.text.toString()
         val employeeBand = textFieldBand.editText!!.text.toString()
@@ -182,11 +191,10 @@ class AddEmployeeActivity : AppCompatActivity() {
                         employeeCompetency,
                         project
                     )
-               if (intentExtra == 0)
+                if (intentExtra == 0)
                     mAddEmployeeViewModel.insertEmployee(employee)
-                else
-                {
-                    employee.id=textFieldId.editText?.text.toString().toInt()
+                else {
+                    employee.id = textFieldId.editText?.text.toString().toInt()
                     mAddEmployeeViewModel.updateEmployee(employee)
                 }
                 clearText()
@@ -203,12 +211,14 @@ class AddEmployeeActivity : AppCompatActivity() {
         dialog = builder.create()
     }
 
+    /** Show Progress Dialog */
     private fun showProgressDialog() {
         if (dialog != null && !dialog.isShowing) {
             dialog.show()
         }
     }
 
+    /** Hide Progress Dialog */
     private fun hideProgressDialog() {
         if (dialog != null && dialog.isShowing) {
             dialog.hide()

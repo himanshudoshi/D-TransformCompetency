@@ -12,6 +12,9 @@ import com.techm.competency.utils.ResponseStatus
 import kotlinx.coroutines.launch
 import org.jetbrains.annotations.NotNull
 
+/**
+ *  Project View Model class to Save Project Details
+ */
 class ProjectViewModel(@NotNull application: Application) :
     AndroidViewModel(application) {
 

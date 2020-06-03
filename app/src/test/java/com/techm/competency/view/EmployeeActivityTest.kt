@@ -16,7 +16,11 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import java.net.SocketException
 
-class EmployeeActivityTest{
+/**
+ * Employee Activity Test
+ */
+class EmployeeActivityTest {
+
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -31,6 +35,8 @@ class EmployeeActivityTest{
         this.employeeRepository = EmployeeRepository(application)
         this.mEmployeeViewModel = EmployeeViewModel(application)
     }
+
+    /** This test should be success because we will get success response  */
     @Test
     fun test_getEmployeeInformationQuerySuccess() {
 
@@ -45,11 +51,11 @@ class EmployeeActivityTest{
         Thread.sleep(10000)
         assertNotNull(this.mEmployeeViewModel.mEmployeeInformationData.value)
     }
-    /**
-     * This test should be fail because we will get success response from API
-     * */
+
+    /** This test should be fail because we will get success response  */
     @Test
     fun test_getEmployeeInformationQueryError() {
+
         Mockito.`when`(this.employeeRepository.getAllEmployeeData()).thenAnswer {
             return@thenAnswer Maybe.error<SocketException>(SocketException("No network here"))
         }

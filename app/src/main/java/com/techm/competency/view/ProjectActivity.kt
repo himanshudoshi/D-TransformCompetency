@@ -14,19 +14,22 @@ import com.techm.competency.utils.toast
 import com.techm.competency.viewmodel.ProjectViewModel
 import kotlinx.android.synthetic.main.activity_project.*
 
+/**
+ * Activity that displays all Project details in the app
+ */
 class ProjectActivity : AppCompatActivity(), ProjectRecyclerViewAdapter.ItemClickListener {
+
     private lateinit var projectViewModel: ProjectViewModel
     private lateinit var mProjectAdapter: ProjectRecyclerViewAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_project)
-        supportActionBar?.title=getString(R.string.add_project)
+        supportActionBar?.title = getString(R.string.add_project)
         projectViewModel = ViewModelProvider(this).get(ProjectViewModel::class.java)
 
-        /**
-         * Setting blank adapter for initialize
-         */
+        /** Adapter for initialize */
         mProjectAdapter = ProjectRecyclerViewAdapter(ArrayList(), ApplicationContext.context, this)
         linearLayoutManager = LinearLayoutManager(this)
         projectList.layoutManager = linearLayoutManager
@@ -38,20 +41,15 @@ class ProjectActivity : AppCompatActivity(), ProjectRecyclerViewAdapter.ItemClic
                 projectName.setText("")
             }
         }
-        /**
-         * API Live data observer
-         * */
+        /** Live data observer */
         projectViewModel.mProjectStatus.observe(this, Observer {
 
             when (it.status) {
                 ResponseStatus.SUCCESS -> {
                     toast(getString(R.string.record_save_successfully))
-
-                    //clearText()
                 }
                 ResponseStatus.FAIL ->
                     toast(getString(R.string.serviceFailureError))
-
             }
         })
         projectViewModel.mProjectData.observe(this, Observer {

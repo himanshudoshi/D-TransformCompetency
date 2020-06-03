@@ -10,8 +10,10 @@ import androidx.room.RoomDatabase
  */
 @Database(entities = [Employee::class, Project::class], version = 3)
 abstract class CompetencyDatabase : RoomDatabase() {
+
     abstract fun getEmployeeDao(): EmployeeDao
     abstract fun getProjectDao(): ProjectDao
+
     companion object {
         @Volatile
         private var instance: CompetencyDatabase? = null

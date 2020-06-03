@@ -11,7 +11,8 @@ import com.techm.competency.database.Project
 import kotlinx.android.synthetic.main.item_layout.view.project
 import kotlin.collections.ArrayList
 
-class ProjectRecyclerViewAdapter: RecyclerView.Adapter<ProjectViewHolder> {
+/** Class Adapter to populate items */
+class ProjectRecyclerViewAdapter : RecyclerView.Adapter<ProjectViewHolder> {
     private var itemsList = ArrayList<Project>()
     private var items = ArrayList<Project>()
     lateinit var context: Context
@@ -30,22 +31,23 @@ class ProjectRecyclerViewAdapter: RecyclerView.Adapter<ProjectViewHolder> {
         itemsList.addAll(items)
     }
 
+    /** Return item counts of Projects */
     override fun getItemCount(): Int {
         return items.size
     }
 
+    /** Remove items in list  for SwipeToDelete functionality and update data set */
     fun removeAt(position: Int) {
         this.items.removeAt(position)
         notifyItemRemoved(position)
     }
 
+    /**  Find item in list for SwipeToDelete functionality and update data set */
     fun getItemAtPosition(position: Int): Project {
         return this.items[position]
     }
 
-    /**
-     * setting updated list
-     * */
+    /** set items in list and update data set */
     fun setList(dataInformation: List<Project>) {
         this.items = dataInformation as ArrayList<Project>
         itemsList.addAll(items)
@@ -56,10 +58,14 @@ class ProjectRecyclerViewAdapter: RecyclerView.Adapter<ProjectViewHolder> {
         fun onItemClick(mProject: Project, position: Int)
     }
 
+    /**  Adapter class to display data in recyclerview.  */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
-        return ProjectViewHolder(LayoutInflater.from(context).inflate(R.layout.item_project, parent, false))
+        return ProjectViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.item_project, parent, false)
+        )
     }
 
+    /** Bind Data to ViewHolder */
     override fun onBindViewHolder(holderViewHolder: ProjectViewHolder, position: Int) {
         holderViewHolder.projectName.text = items[position].projectName
 
@@ -68,6 +74,9 @@ class ProjectRecyclerViewAdapter: RecyclerView.Adapter<ProjectViewHolder> {
     }
 }
 
+/**
+ * This Class used to describe an item view & metadata about its place within the recyclerview
+ */
 class ProjectViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(
         project: Project,

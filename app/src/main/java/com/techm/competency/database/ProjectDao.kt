@@ -5,10 +5,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.techm.competency.model.ProjectModel
 
 /**
- * In this interface have all queries fo room database
+ * Interface for Project Queries
  */
 @Dao
 interface ProjectDao {

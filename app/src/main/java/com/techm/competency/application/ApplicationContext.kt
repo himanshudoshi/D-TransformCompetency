@@ -12,9 +12,7 @@ class ApplicationContext : Application() {
         lateinit var context: Context
     }
 
-    /**
-     * This method is used to initialize the context
-     */
+    /** This method is used to initialize the context */
     override fun onCreate() {
         super.onCreate()
         context = this

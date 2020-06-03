@@ -14,9 +14,7 @@ import kotlinx.android.synthetic.main.item_layout.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-/**
- * This class for creating items in recycler view
- * */
+/** Class Adapter to populate items */
 class EmployeesRecyclerViewAdapter : RecyclerView.Adapter<ViewHolder> {
     private var itemsList = ArrayList<Employee>()
     private var items = ArrayList<Employee>()
@@ -36,21 +34,22 @@ class EmployeesRecyclerViewAdapter : RecyclerView.Adapter<ViewHolder> {
         itemsList.addAll(items)
     }
 
+    /** Return item counts of Employees. */
     override fun getItemCount(): Int {
         return items.size
     }
 
-    // Inflates the item views
+    /**  Adapter class to display data in recyclerview.  */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false))
     }
 
-    // Binds each object in the ArrayList to a view
+    /** Bind Data to ViewHolder */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.employeeName.text = items[position].name
         holder.designation.text = items[position].designation
         holder.project.text = items[position].project
-        holder.band.text = "("+items[position].band+")"
+        holder.band.text = "(" + items[position].band + ")"
         holder.employeeId.text = items[position].employeeId
         holder.competency.text = items[position].competency
 
@@ -58,40 +57,38 @@ class EmployeesRecyclerViewAdapter : RecyclerView.Adapter<ViewHolder> {
 
         when (items[position].competency) {
             context.resources.getString(R.string.android) ->
-                holder.employeeImage.load(context.resources.getDrawable(R.drawable.android))
+                holder.employeeImage.load(context.resources.getDrawable(R.drawable.ic_android))
 
             context.resources.getString(R.string.ios) ->
-                holder.employeeImage.load(context.resources.getDrawable(R.drawable.ios))
+                holder.employeeImage.load(context.resources.getDrawable(R.drawable.ic_iphone))
 
             context.resources.getString(R.string.ux) ->
-                holder.employeeImage.load(context.resources.getDrawable(R.drawable.ux))
+                holder.employeeImage.load(context.resources.getDrawable(R.drawable.ic_graphics))
 
             context.resources.getString(R.string.tester) ->
-                holder.employeeImage.load(context.resources.getDrawable(R.drawable.tester))
+                holder.employeeImage.load(context.resources.getDrawable(R.drawable.ic_testing))
         }
     }
 
+    /** Remove items in list  for SwipeToDelete functionality and update data set */
     fun removeAt(position: Int) {
         this.items.removeAt(position)
         notifyItemRemoved(position)
     }
 
+    /** Find items in list  for SwipeToDelete functionality and update data set */
     fun getItemAtPosition(position: Int): Employee {
         return this.items[position]
     }
 
-    /**
-     * setting updated list
-     * */
+    /** set items in list and update data set */
     fun setList(dataInformation: List<Employee>) {
         this.items = dataInformation as ArrayList<Employee>
         itemsList.addAll(items)
         notifyDataSetChanged()
     }
 
-    /**
-     * filter employee list
-     * **/
+    /** This function is created for SearchView Functionality based on text it filters Data and shows Recyclerview */
     fun filter(charText: String) {
         var charText = charText
         charText = charText.toLowerCase(Locale.getDefault())
@@ -113,6 +110,7 @@ class EmployeesRecyclerViewAdapter : RecyclerView.Adapter<ViewHolder> {
     }
 }
 
+/** This Class used to describe an item view & metadata about its place within the recyclerview */
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(
         employee: Employee,
@@ -131,6 +129,4 @@ class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val employeeImage: ImageView = view.employeeImage
     val employeeId: TextView = view.employeeId
     val competency: TextView = view.competency
-
-
 }
