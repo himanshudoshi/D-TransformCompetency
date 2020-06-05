@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.techm.competency.database.Employee
 import com.techm.competency.database.Project
 import com.techm.competency.database.ProjectRepository
 import com.techm.competency.model.ProjectModel
@@ -33,4 +34,10 @@ class ProjectViewModel(@NotNull application: Application) :
         else
             mProjectStatus.value = ProjectModel("", ResponseStatus.FAIL)
     }
+
+    /** Delete Project Functionality  */
+    fun deleteProject(project:Project) =
+        viewModelScope.launch {
+            projectRepository.deleteProject(project)
+        }
 }

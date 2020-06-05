@@ -13,7 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.techm.competency.R
-import com.techm.competency.adapter.SpinnerAdapter
+import com.techm.competency.adapter.ProjectSpinnerViewAdapter
 import com.techm.competency.database.Employee
 import com.techm.competency.database.Project
 import com.techm.competency.utils.Constant
@@ -29,7 +29,7 @@ class AddEmployeeActivity : AppCompatActivity() {
 
     private lateinit var builder: AlertDialog.Builder
     private lateinit var mAddEmployeeViewModel: AddEmployeeViewModel
-    private lateinit var mSpinnerAdapter: SpinnerAdapter
+    private lateinit var mProjectSpinnerViewAdapter: ProjectSpinnerViewAdapter
     private lateinit var dialog: AlertDialog
     private var intentExtra: Int = 0
     private var editProjectName = ""
@@ -66,13 +66,13 @@ class AddEmployeeActivity : AppCompatActivity() {
         }
         setupProgressDialog()
 
-        mSpinnerAdapter = SpinnerAdapter(this, ArrayList())
-        spinnerProject.adapter = mSpinnerAdapter
+        mProjectSpinnerViewAdapter = ProjectSpinnerViewAdapter(this, ArrayList())
+        spinnerProject.adapter = mProjectSpinnerViewAdapter
 
         mAddEmployeeViewModel.mProjectData.observe(this, Observer {
-            mSpinnerAdapter.setLIst(it as ArrayList<Project>)
+            mProjectSpinnerViewAdapter.setLIst(it as ArrayList<Project>)
             if (intentExtra != 0) {
-                val position = mSpinnerAdapter.getPosition(editProjectName)
+                val position = mProjectSpinnerViewAdapter.getPosition(editProjectName)
                 spinnerProject.setSelection(position)
             }
         })
@@ -83,7 +83,7 @@ class AddEmployeeActivity : AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                project = mSpinnerAdapter.getItem(position).projectName
+                project = mProjectSpinnerViewAdapter.getItem(position).projectName
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {

@@ -13,6 +13,5 @@
         android:textStyle="bold"
         android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
-        android:text="sadfsdfdsfdsfsdfdsf"
         android:layout_height="wrap_content" />
 </LinearLayout>

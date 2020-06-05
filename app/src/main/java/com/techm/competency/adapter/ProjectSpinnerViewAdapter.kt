@@ -11,7 +11,7 @@ import com.techm.competency.database.Project
 import kotlinx.android.synthetic.main.item_project.view.*
 
 /** Class Adapter to populate items in Spinner */
-class SpinnerAdapter(val context: Context, private var projectList: ArrayList<Project>) :
+class ProjectSpinnerViewAdapter(val context: Context, private var projectList: ArrayList<Project>) :
     BaseAdapter() {
 
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
@@ -20,7 +20,7 @@ class SpinnerAdapter(val context: Context, private var projectList: ArrayList<Pr
         val vh: ItemRowHolder
         val view: View = mInflater.inflate(R.layout.item_project, parent, false)
         vh = ItemRowHolder(view)
-        view?.tag = vh
+        view.tag = vh
 
         vh.label.text = projectList[position].projectName
         return view

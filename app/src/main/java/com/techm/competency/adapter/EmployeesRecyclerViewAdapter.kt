@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_layout.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-/** Class Adapter to populate items */
+/** Employee Adapter Class to Populate Employee items */
 class EmployeesRecyclerViewAdapter : RecyclerView.Adapter<ViewHolder> {
     private var itemsList = ArrayList<Employee>()
     private var items = ArrayList<Employee>()
@@ -39,12 +39,12 @@ class EmployeesRecyclerViewAdapter : RecyclerView.Adapter<ViewHolder> {
         return items.size
     }
 
-    /**  Adapter class to display data in recyclerview.  */
+    /**  Adapter class to display Employee data in recyclerview.  */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false))
     }
 
-    /** Bind Data to ViewHolder */
+    /** Bind Employee Data to ViewHolder */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.employeeName.text = items[position].name
         holder.designation.text = items[position].designation
@@ -70,25 +70,25 @@ class EmployeesRecyclerViewAdapter : RecyclerView.Adapter<ViewHolder> {
         }
     }
 
-    /** Remove items in list  for SwipeToDelete functionality and update data set */
+    /** Remove Employee items in list  for SwipeToDelete functionality and update data set */
     fun removeAt(position: Int) {
         this.items.removeAt(position)
         notifyItemRemoved(position)
     }
 
-    /** Find items in list  for SwipeToDelete functionality and update data set */
+    /** Find Employee items in list  for SwipeToDelete functionality and update data set */
     fun getItemAtPosition(position: Int): Employee {
         return this.items[position]
     }
 
-    /** set items in list and update data set */
+    /** set Employee items in list and update data set */
     fun setList(dataInformation: List<Employee>) {
         this.items = dataInformation as ArrayList<Employee>
         itemsList.addAll(items)
         notifyDataSetChanged()
     }
 
-    /** This function is created for SearchView Functionality based on text it filters Data and shows Recyclerview */
+    /** This function is created for SearchView Functionality based on Employee Search text it filters Data and shows Recyclerview */
     fun filter(charText: String) {
         var charText = charText
         charText = charText.toLowerCase(Locale.getDefault())
@@ -110,7 +110,7 @@ class EmployeesRecyclerViewAdapter : RecyclerView.Adapter<ViewHolder> {
     }
 }
 
-/** This Class used to describe an item view & metadata about its place within the recyclerview */
+/** This Class used to describe an Employee item view & metadata about its place within the recyclerview */
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(
         employee: Employee,

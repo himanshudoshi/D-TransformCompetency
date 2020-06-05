@@ -3,15 +3,11 @@
 
     <string name="record_save_successfully">Record Save Successfully</string>
     <string name="serviceFailureError">Something went wrong</string>
-    <string name="employee_deleted_successfully">Employee Deleted Successfully</string>
     <string name="add_employee">Add Employee</string>
     <string name="competency_title">COMPETENCY</string>
     <string name="search">Search</string>
-    <string name="match_not_found">Match Not Found</string>
-    <string name="submit">Submit</string>
     <string name="save">Save</string>
     <string name="input_required">Input required</string>
-    <string name="device_not_connected_to_internet">"Device not connected to internet "</string>
     <string name="competency">Competency :</string>
     <string name="project">Project : </string>
     <string name="action_add">Add</string>
@@ -32,14 +28,7 @@
     <string name="select_project">Select project</string>
     <string name="enter_project">Enter Project</string>
     <string name="add_project">Add Project</string>
+    <string name="queryhint">Search Here</string>
+    <string name="loading_message">Please wait! This may take a moment.</string>
 
-    <string-array name="Projects">
-        <item>Select project</item>
-        <item>ATT FirstNet</item>
-        <item>Sawari Cab App</item>
-        <item>Resource Management App</item>
-        <item>ATT</item>
-        <item>TMobile</item>
-        <item>Bell Canada</item>
-    </string-array>
 </resources>
