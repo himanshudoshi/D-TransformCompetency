@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 /**
  * Activity that displays all Employee details in the app
  */
-class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
+class EmployeeActivity : AppCompatActivity(),
     EmployeesRecyclerViewAdapter.ItemClickListener {
     private lateinit var mEmployeeViewModel: EmployeeViewModel
     private lateinit var mEmployeeAdapter: EmployeesRecyclerViewAdapter
@@ -94,10 +94,6 @@ class EmployeeActivity : AppCompatActivity(), View.OnClickListener,
         mEmployeeViewModel.mEmployeeInformationData.observe(this, Observer {
             mEmployeeAdapter.setList(it)
         })
-    }
-
-    override fun onClick(v: View?) {
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
